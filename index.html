@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Конструктор анкет</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="app-title">Конструктор анкет</h1>
+        <input
+          type="text"
+          id="questionnaireTitle"
+          class="questionnaire-title-input"
+          placeholder="Введите название анкеты"
+        />
+      </div>
+
+      <div class="topbar-actions">
+        <button id="newQuestionnaireBtn" class="btn btn-secondary">Новая анкета</button>
+        <button id="clearQuestionnaireBtn" class="btn btn-secondary">Очистить</button>
+        <button id="checkQuestionnaireBtn" class="btn btn-secondary">Проверить анкету</button>
+        <button id="previewQuestionnaireBtn" class="btn btn-secondary">Предпросмотр анкеты</button>
+        <button id="exportWordBtn" class="btn btn-primary">Скачать Word</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="panel panel-left" id="libraryPanel">
+        <div class="panel-header">
+          <h2 class="panel-title">Библиотека вопросов</h2>
+        </div>
+
+        <div class="library-search">
+          <input
+            type="text"
+            id="librarySearch"
+            class="search-input"
+            placeholder="Поиск блоков и вопросов"
+          />
+        </div>
+
+        <div class="library-tabs">
+          <button id="libraryTabBlocks" class="tab-btn active" type="button" data-tab="blocks">
+            Готовые блоки
+          </button>
+          <button id="libraryTabTypes" class="tab-btn" type="button" data-tab="types">
+            Типы вопросов
+          </button>
+        </div>
+
+        <div id="libraryContent" class="library-content"></div>
+      </aside>
+
+      <section class="panel panel-center" id="editorPanel">
+        <div class="panel-header">
+          <h2 class="panel-title">Редактор вопроса</h2>
+        </div>
+
+        <div id="editorEmptyState" class="empty-state">
+          <p>Выберите вопрос слева для редактирования</p>
+        </div>
+
+        <div id="questionEditorWrapper" class="question-editor hidden">
+          <form id="questionEditorForm" class="question-editor-form">
+            <div class="form-group">
+              <label for="questionTitle">Название вопроса</label>
+              <input type="text" id="questionTitle" name="questionTitle" />
+            </div>
+
+            <div class="form-group">
+              <label for="questionType">Тип вопроса</label>
+              <input type="text" id="questionType" name="questionType" readonly />
+            </div>
+
+            <div class="form-group">
+  <label for="questionText">Текст вопроса</label>
+
+  <div class="format-toolbar">
+    <button type="button" data-format="bold">B</button>
+    <button type="button" data-format="italic">I</button>
+    <button type="button" data-format="underline">U</button>
+  </div>
+
+  <div
+    id="questionText"
+    class="rich-text-editor"
+    contenteditable="true"
+  ></div>
+</div>
+
+            <div id="dynamicQuestionFields" class="dynamic-question-fields"></div>
+
+            <div class="form-group">
+              <label for="questionComment">Комментарий</label>
+              <textarea id="questionComment" name="questionComment" rows="3"></textarea>
+            </div>
+          </form>
+
+          <div class="editor-actions">
+            <button id="saveQuestionBtn" class="btn btn-secondary" type="button">
+              Сохранить изменения
+            </button>
+            <button id="addQuestionBtn" class="btn btn-primary" type="button">
+              Добавить в анкету
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel panel-right" id="questionnairePanel">
+        <div class="panel-header">
+          <h2 class="panel-title">Структура анкеты</h2>
+        </div>
+
+        <div id="questionnaireEmptyState" class="empty-state">
+          <p>Анкета пока пуста. Добавьте вопросы из библиотеки.</p>
+        </div>
+
+        <div id="questionnaireStructure" class="questionnaire-structure"></div>
+      </aside>
+    </main>
+  </div>
+
+  <div id="previewModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Предпросмотр анкеты</h2>
+        <button id="closePreviewBtn" class="modal-close-btn" type="button">×</button>
+      </div>
+
+      <div id="previewContent" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/docx@9.6.1/dist/index.iife.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
